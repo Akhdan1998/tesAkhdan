@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "920519774691",
+    "project_id": "tesakhdan",
+    "storage_bucket": "tesakhdan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920519774691:android:6ee12afd0fe212b4bf50d6",
+        "android_client_info": {
+          "package_name": "com.akhdan.tes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDvcMmX8edhTdektfbZygOtiI-pKGQyog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
