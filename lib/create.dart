@@ -28,6 +28,7 @@ class _createState extends State<create> {
         child: Container(
           padding: EdgeInsets.all(20),
           child: SingleChildScrollView(
+            reverse: true,
             scrollDirection: Axis.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,6 +60,7 @@ class _createState extends State<create> {
                 ),
                 SizedBox(height: 5),
                 TextFormField(
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == '') {
                       return 'Tahun terbit tidak boleh kosong!!';

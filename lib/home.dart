@@ -113,7 +113,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                     GestureDetector(
                                       onTap: () {
                                         showModalBottomSheet<void>(
-                                          isDismissible: true,
+                                          useSafeArea: true,
+                                          isScrollControlled: true,
+                                          // isDismissible: true,
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(50),
@@ -123,17 +125,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                           context: context,
                                           builder: (BuildContext context) {
                                             return SingleChildScrollView(
+                                              reverse: true,
                                               scrollDirection: Axis.vertical,
                                               child: Container(
                                                 padding: EdgeInsets.only(
                                                     right: 20,
                                                     top: 20,
-                                                    left: 20),
+                                                    left: 20, bottom: MediaQuery.of(context).viewInsets.bottom,),
                                                 child: Column(
                                                   mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                                  mainAxisSize:
-                                                  MainAxisSize.min,
+                                                  // mainAxisSize:
+                                                  // MainAxisSize.min,
                                                   children: <Widget>[
                                                     Text(
                                                         'Edit Atribut Buku'),
@@ -154,6 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     SizedBox(height: 5),
                                                     TextFormField(
+                                                      keyboardType: TextInputType.number,
                                                       controller: tahunTerbit,
                                                       decoration:
                                                       InputDecoration(
