@@ -13,7 +13,7 @@ class _createState extends State<create> {
   final tahunTerbit = TextEditingController();
   final namaPenerbit = TextEditingController();
   final namaPengarang = TextEditingController();
-
+  final _formState = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -23,48 +23,81 @@ class _createState extends State<create> {
         title: Text('Buat Atribut Buku'),
         centerTitle: true,
       ),
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                controller: kodeBuku,
-                decoration: InputDecoration(
-                  labelText: "Kode Buku",
+      body: Form(
+        key: _formState,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextFormField(
+                  validator: (value) {
+                    if (value == '') {
+                      return 'Kode buku tidak boleh kosong!!';
+                    }
+                    return null;
+                  },
+                  controller: kodeBuku,
+                  decoration: InputDecoration(
+                    labelText: "Kode Buku",
+                  ),
                 ),
-              ),
-              SizedBox(height: 5),
-              TextFormField(
-                controller: judulBuku,
-                decoration: InputDecoration(
-                  labelText: "Judul Buku",
+                SizedBox(height: 5),
+                TextFormField(
+                  validator: (value) {
+                    if (value == '') {
+                      return 'Judul tidak boleh kosong!!';
+                    }
+                    return null;
+                  },
+                  controller: judulBuku,
+                  decoration: InputDecoration(
+                    labelText: "Judul Buku",
+                  ),
                 ),
-              ),
-              SizedBox(height: 5),
-              TextFormField(
-                controller: tahunTerbit,
-                decoration: InputDecoration(
-                  labelText: "Tahun Terbit",
+                SizedBox(height: 5),
+                TextFormField(
+                  validator: (value) {
+                    if (value == '') {
+                      return 'Tahun terbit tidak boleh kosong!!';
+                    }
+                    return null;
+                  },
+                  controller: tahunTerbit,
+                  decoration: InputDecoration(
+                    labelText: "Tahun Terbit",
+                  ),
                 ),
-              ),
-              SizedBox(height: 5),
-              TextFormField(
-                controller: namaPenerbit,
-                decoration: InputDecoration(
-                  labelText: "Nama Penerbit",
+                SizedBox(height: 5),
+                TextFormField(
+                  validator: (value) {
+                    if (value == '') {
+                      return 'Nama Penerbit tidak boleh kosong!!';
+                    }
+                    return null;
+                  },
+                  controller: namaPenerbit,
+                  decoration: InputDecoration(
+                    labelText: "Nama Penerbit",
+                  ),
                 ),
-              ),
-              SizedBox(height: 5),
-              TextFormField(
-                controller: namaPengarang,
-                decoration: InputDecoration(
-                  labelText: "Nama Pengarang",
+                SizedBox(height: 5),
+                TextFormField(
+                  validator: (value) {
+                    if (value == '') {
+                      return 'Nama Pengarang tidak boleh kosong!!';
+                    }
+                    return null;
+                  },
+                  controller: namaPengarang,
+                  decoration: InputDecoration(
+                    labelText: "Nama Pengarang",
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -73,25 +106,27 @@ class _createState extends State<create> {
         padding: EdgeInsets.all(15),
         child: GestureDetector(
           onTap: () {
-            users.add({
-              'kodeBuku': kodeBuku.text,
-              'judulBuku': judulBuku.text,
-              'tahunTerbit': int.tryParse(tahunTerbit.text) ?? 0,
-              'namaPenerbit': namaPenerbit.text,
-              'namaPengarang': namaPengarang.text,
-            });
-            kodeBuku.text = '';
-            judulBuku.text = '';
-            tahunTerbit.text = '';
-            namaPenerbit.text = '';
-            namaPengarang.text = '';
-            Get.to(MyHomePage());
+            if (_formState.currentState!.validate()) {
+              users.add({
+                'kodeBuku': kodeBuku.text,
+                'judulBuku': judulBuku.text,
+                'tahunTerbit': int.tryParse(tahunTerbit.text) ?? 0,
+                'namaPenerbit': namaPenerbit.text,
+                'namaPengarang': namaPengarang.text,
+              });
+              kodeBuku.text = '';
+              judulBuku.text = '';
+              tahunTerbit.text = '';
+              namaPenerbit.text = '';
+              namaPengarang.text = '';
+              Get.to(MyHomePage());
+            } else {}
           },
           child: Container(
             height: 40,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Colors.white,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(

@@ -182,11 +182,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     SizedBox(height: 10),
                                                     TextButton(
                                                       onPressed: () {
-                                                        // Mendapatkan ID dokumen
                                                         String documentId = e
                                                             .id;
-
-                                                        // Mengupdate seluruh data di Firestore berdasarkan ID
                                                         users.doc(documentId)
                                                             .update({
                                                           'kodeBuku': kodeBuku
@@ -234,6 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     GestureDetector(
                                       onTap: () {
                                         users.doc(e.id).delete();
+                                        Get.to(create());
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
